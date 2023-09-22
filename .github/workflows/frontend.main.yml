@@ -27,7 +27,7 @@ jobs:
       with:
         azcliversion: 2.52.0
         inlineScript: |
-           az cdn endpoint purge --content-paths  "/*" --profile-name "www.pushtech.one" --name "azureresumejpryce" --resource-group "cloud-shell-storage-eastus"
+           az cdn endpoint purge --content-paths  "/*" --profile-name "www.pushtech.one" --name "https://cs210032000dc9ea5d9.z13.web.core.windows.net" --resource-group "cloud-shell-storage-eastus"
 
   # Azure logout
     - name: logout
