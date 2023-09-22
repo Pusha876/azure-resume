@@ -21,7 +21,7 @@ jobs:
       with:
         azcliversion: 2.52.0
         inlineScript: |
-            az storage blob upload-batch --account-name getjamieresumecounter --auth-mode login '$web' -s .
+            az storage blob upload-batch --account-name getjamieresumecounter --auth-mode login -d '$web' -s .
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
