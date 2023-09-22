@@ -21,13 +21,13 @@ jobs:
       with:
         azcliversion: 2.52.0
         inlineScript: |
-            az storage blob upload-batch --account-name getjamieresumecounter -d '$web' -s frontend/
+            az storage blob upload-batch --account-name getjamieresumecounter -d '$web' -s .
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
         azcliversion: 2.52.0
         inlineScript: |
-           az cdn endpoint purge --content-paths  "/*" --profile-name "azureresumejpryce (azureresume/azureresumejpryce)" --name "azureresumejpryce/azureresumejpryce" --resource-group "azureresume-rg"
+           az cdn endpoint purge --content-paths  "/*" --profile-name "azureresume" --name "azureresumejpryce (azureresume/azureresumejpryce)" --resource-group "cloud-shell-storage-eastus"
 
   # Azure logout
     - name: logout
