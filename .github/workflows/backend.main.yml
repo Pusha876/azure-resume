@@ -35,11 +35,13 @@ jobs:
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/api'
         dotnet build --configuration Release --output ./output
         popd
+
     - name: 'Run unit test'
       shell: pwsh
-      run: 
+      run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/tests'
         dotnet test
+
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
       id: fa
