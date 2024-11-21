@@ -209,9 +209,10 @@ c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.GeneratedMSBuildE
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.AssemblyInfoInputs.cache
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.AssemblyInfo.cs
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.csproj.CoreCompileInputs.cache
-c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.csproj.CopyComplete
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.dll
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\refint\tests.dll
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.pdb
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.genruntimeconfig.cache
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\ref\tests.dll
+c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.sourcelink.json
+c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.csproj.Up2Date

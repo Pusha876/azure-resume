@@ -4,5 +4,8 @@
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
     "azureFunctions.preDeployTask": "publish (functions)",
-    "azureFunctions.projectSubpath": "backend\\api"
+    "azureFunctions.projectSubpath": "backend\\api",
+    "cSpell.words": [
+        "localfunction"
+    ]
 }

@@ -2544,7 +2544,10 @@
           "Microsoft.NET.Sdk.Functions": "4.2.0"
         },
         "runtime": {
-          "api.dll": {}
+          "api.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

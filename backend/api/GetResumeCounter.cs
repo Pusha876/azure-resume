@@ -17,25 +17,28 @@ namespace Company.Function
     public static class GetResumeCounter
     {
         [FunctionName("GetResumeCounter")]
-        public static HttpResponseMessage Run(
+        public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            [CosmosDB(databaseName:"AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] Counter counter,
-            [CosmosDB(databaseName:"AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] out Counter updatedcounter,
+            [CosmosDB(databaseName:"AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] ResumeCounter counter,
+            [CosmosDB(databaseName:"AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] IAsyncCollector<ResumeCounter> updatedCounterCollector,
             ILogger log)
         {
-            // In here is where the counter gets updated. Please note that the resource name is not the same as the container name.
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            updatedcounter = counter;
-            updatedcounter.Count += 1;
+            counter.Count += 1;
+            await updatedCounterCollector.AddAsync(counter);
 
             var jsonToReturn = JsonConvert.SerializeObject(counter);
-
-
-            return new HttpResponseMessage(System.Net.HttpStatusCode.OK)
-            {
-                Content = new StringContent(jsonToReturn, Encoding.UTF8, "application/json")
-            };
+            return new OkObjectResult(jsonToReturn);
         }
+    }
+
+    public class ResumeCounter
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("count")]
+        public int Count { get; set; }
     }
 }
