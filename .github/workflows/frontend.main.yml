@@ -2,9 +2,7 @@ name: deploy_frontend
 # Deploys when push is made from frontend folder
 permissions:
     id-token: write
-
-permissions:
-    id-token: write
+    contents: read
 
 on:
     push:
