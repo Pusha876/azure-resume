@@ -1,9 +1,5 @@
 name: Deploy_backend
 
-permissions:
-    id-token: write
-    
-
 on:
     push:
         branches: [main]
