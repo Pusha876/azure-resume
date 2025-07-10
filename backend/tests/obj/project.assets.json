@@ -2,15 +2,15 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "Azure.Core/1.40.0": {
+      "Azure.Core/1.42.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "1.1.1",
+          "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
           "System.ClientModel": "1.0.0",
           "System.Diagnostics.DiagnosticSource": "6.0.1",
           "System.Memory.Data": "1.0.2",
           "System.Numerics.Vectors": "4.5.0",
-          "System.Text.Encodings.Web": "4.7.2",
+          "System.Text.Encodings.Web": "6.0.0",
           "System.Text.Json": "4.7.2",
           "System.Threading.Tasks.Extensions": "4.5.4"
         },
@@ -25,10 +25,10 @@
           }
         }
       },
-      "Azure.Identity/1.11.4": {
+      "Azure.Identity/1.12.0": {
         "type": "package",
         "dependencies": {
-          "Azure.Core": "1.38.0",
+          "Azure.Core": "1.40.0",
           "Microsoft.Identity.Client": "4.61.3",
           "Microsoft.Identity.Client.Extensions.Msal": "4.61.3",
           "System.Memory": "4.5.4",
@@ -813,7 +813,24 @@
           }
         }
       },
-      "Microsoft.Azure.Cosmos/3.41.0": {
+      "Microsoft.Azure.Core.NewtonsoftJson/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Azure.Core": "1.36.0",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Azure.Core.NewtonsoftJson.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Azure.Core.NewtonsoftJson.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Azure.Cosmos/3.44.1": {
         "type": "package",
         "dependencies": {
           "Azure.Core": "1.19.0",
@@ -825,8 +842,10 @@
           "System.Configuration.ConfigurationManager": "6.0.0",
           "System.Diagnostics.DiagnosticSource": "6.0.1",
           "System.Memory": "4.5.4",
+          "System.Net.Http": "4.3.4",
           "System.Numerics.Vectors": "4.5.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Text.RegularExpressions": "4.3.1",
           "System.Threading.Tasks.Extensions": "4.5.4",
           "System.ValueTuple": "4.5.0"
         },
@@ -875,10 +894,10 @@
       "Microsoft.Azure.Functions.Analyzers/1.0.0": {
         "type": "package"
       },
-      "Microsoft.Azure.WebJobs/3.0.37": {
+      "Microsoft.Azure.WebJobs/3.0.41": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Azure.WebJobs.Core": "3.0.37",
+          "Microsoft.Azure.WebJobs.Core": "3.0.41",
           "Microsoft.Extensions.Configuration": "2.1.1",
           "Microsoft.Extensions.Configuration.Abstractions": "2.1.1",
           "Microsoft.Extensions.Configuration.EnvironmentVariables": "2.1.0",
@@ -898,7 +917,7 @@
           "lib/netstandard2.0/Microsoft.Azure.WebJobs.Host.dll": {}
         }
       },
-      "Microsoft.Azure.WebJobs.Core/3.0.37": {
+      "Microsoft.Azure.WebJobs.Core/3.0.41": {
         "type": "package",
         "dependencies": {
           "System.ComponentModel.Annotations": "4.4.0",
@@ -930,13 +949,14 @@
           "lib/netstandard2.0/Microsoft.Azure.WebJobs.Extensions.dll": {}
         }
       },
-      "Microsoft.Azure.WebJobs.Extensions.CosmosDB/4.8.1": {
+      "Microsoft.Azure.WebJobs.Extensions.CosmosDB/4.9.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Azure.Cosmos": "3.41.0",
-          "Microsoft.Azure.WebJobs": "3.0.37",
-          "Microsoft.CSharp": "4.5.0",
-          "Microsoft.Extensions.Azure": "1.7.4"
+          "Microsoft.Azure.Core.NewtonsoftJson": "2.0.0",
+          "Microsoft.Azure.Cosmos": "3.44.1",
+          "Microsoft.Azure.WebJobs": "3.0.41",
+          "Microsoft.CSharp": "4.7.0",
+          "Microsoft.Extensions.Azure": "1.7.5"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Azure.WebJobs.Extensions.CosmosDB.dll": {
@@ -992,10 +1012,12 @@
           "build/_._": {}
         }
       },
-      "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
+      "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
         "type": "package",
         "compile": {
-          "ref/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {}
+          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
@@ -1118,7 +1140,7 @@
           "build/netstandard2.0/Microsoft.CodeCoverage.targets": {}
         }
       },
-      "Microsoft.CSharp/4.5.0": {
+      "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.0/_._": {}
@@ -1146,11 +1168,11 @@
           "lib/netstandard1.3/Microsoft.DotNet.PlatformAbstractions.dll": {}
         }
       },
-      "Microsoft.Extensions.Azure/1.7.4": {
+      "Microsoft.Extensions.Azure/1.7.5": {
         "type": "package",
         "dependencies": {
-          "Azure.Core": "1.40.0",
-          "Azure.Identity": "1.11.4",
+          "Azure.Core": "1.42.0",
+          "Azure.Identity": "1.12.0",
           "Microsoft.Extensions.Configuration.Abstractions": "2.1.0",
           "Microsoft.Extensions.Configuration.Binder": "2.1.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0",
@@ -3632,16 +3654,28 @@
           }
         }
       },
-      "System.Text.Encodings.Web/4.7.2": {
+      "System.Text.Encodings.Web/6.0.0": {
         "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
         "compile": {
-          "lib/netstandard2.1/System.Text.Encodings.Web.dll": {
+          "lib/net6.0/System.Text.Encodings.Web.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.1/System.Text.Encodings.Web.dll": {
+          "lib/net6.0/System.Text.Encodings.Web.dll": {
             "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/browser/lib/net6.0/System.Text.Encodings.Web.dll": {
+            "assetType": "runtime",
+            "rid": "browser"
           }
         }
       },
@@ -4037,7 +4071,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Microsoft.Azure.WebJobs.Extensions.CosmosDB": "4.8.1",
+          "Microsoft.Azure.WebJobs.Extensions.CosmosDB": "4.9.0",
           "Microsoft.NET.Sdk.Functions": "4.6.0"
         },
         "compile": {
@@ -4050,16 +4084,16 @@
     }
   },
   "libraries": {
-    "Azure.Core/1.40.0": {
-      "sha512": "eOx6wk3kQ3SCnoAj7IytAu/d99l07PdarmUc+RmMkVOTkcQ3s+UQEaGzMyEqC2Ua4SKnOW4Xw/klLeB5V2PiSA==",
+    "Azure.Core/1.42.0": {
+      "sha512": "Fg88OsrjD2nAvz3N0pk2d/AwIHQRrs9CjA9A35OW1YgYhMo0OTz4WkntQK6V2tf84g7SnfJM8ORcZl+bH6P9Cg==",
       "type": "package",
-      "path": "azure.core/1.40.0",
+      "path": "azure.core/1.42.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "CHANGELOG.md",
         "README.md",
-        "azure.core.1.40.0.nupkg.sha512",
+        "azure.core.1.42.0.nupkg.sha512",
         "azure.core.nuspec",
         "azureicon.png",
         "lib/net461/Azure.Core.dll",
@@ -4072,16 +4106,16 @@
         "lib/netstandard2.0/Azure.Core.xml"
       ]
     },
-    "Azure.Identity/1.11.4": {
-      "sha512": "Sf4BoE6Q3jTgFkgBkx7qztYOFELBCo+wQgpYDwal/qJ1unBH73ywPztIJKXBXORRzAeNijsuxhk94h0TIMvfYg==",
+    "Azure.Identity/1.12.0": {
+      "sha512": "OBIM3aPz8n9oEO5fdnee+Vsc5Nl4W3FeslPpESyDiyByntQI5BAa76KD60eFXm9ulevnwxGZP9YXL8Y+paI5Uw==",
       "type": "package",
-      "path": "azure.identity/1.11.4",
+      "path": "azure.identity/1.12.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "CHANGELOG.md",
         "README.md",
-        "azure.identity.1.11.4.nupkg.sha512",
+        "azure.identity.1.12.0.nupkg.sha512",
         "azure.identity.nuspec",
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
@@ -4725,10 +4759,26 @@
         "microsoft.aspnetcore.webutilities.nuspec"
       ]
     },
-    "Microsoft.Azure.Cosmos/3.41.0": {
-      "sha512": "SlY2fuF+U+06Ba440Usii/s92sPCDxxuQDLUUbxgFtczKyxyY3+LhR3n1vLZS3yjDLtmFZHzcgtHu3JQluv1Eg==",
+    "Microsoft.Azure.Core.NewtonsoftJson/2.0.0": {
+      "sha512": "ZKV0eHmR1JM4BXPv0TC5fp3PjbWeO+iwHmnV2acYTElYlU9ilmk97ocfmTmKcRFGOmn4zztWqbCBSmdvKqOQng==",
       "type": "package",
-      "path": "microsoft.azure.cosmos/3.41.0",
+      "path": "microsoft.azure.core.newtonsoftjson/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CHANGELOG.md",
+        "README.md",
+        "azureicon.png",
+        "lib/netstandard2.0/Microsoft.Azure.Core.NewtonsoftJson.dll",
+        "lib/netstandard2.0/Microsoft.Azure.Core.NewtonsoftJson.xml",
+        "microsoft.azure.core.newtonsoftjson.2.0.0.nupkg.sha512",
+        "microsoft.azure.core.newtonsoftjson.nuspec"
+      ]
+    },
+    "Microsoft.Azure.Cosmos/3.44.1": {
+      "sha512": "RKqF3S+BD6Wy4uhlb6a8NXZhkN/cf4A3GrsUOH8GMV/izLDXBfGr3gN6Yk4dBtR9lAPfLJG27G3od9caZv1U4Q==",
+      "type": "package",
+      "path": "microsoft.azure.cosmos/3.44.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4741,7 +4791,7 @@
         "lib/netstandard2.0/Microsoft.Azure.Cosmos.Core.dll",
         "lib/netstandard2.0/Microsoft.Azure.Cosmos.Direct.dll",
         "lib/netstandard2.0/Microsoft.Azure.Cosmos.Serialization.HybridRow.dll",
-        "microsoft.azure.cosmos.3.41.0.nupkg.sha512",
+        "microsoft.azure.cosmos.3.44.1.nupkg.sha512",
         "microsoft.azure.cosmos.nuspec",
         "runtimes/win-x64/native/Cosmos.CRTCompat.dll",
         "runtimes/win-x64/native/Microsoft.Azure.Cosmos.ServiceInterop.dll",
@@ -4766,29 +4816,31 @@
         "tools/uninstall.ps1"
       ]
     },
-    "Microsoft.Azure.WebJobs/3.0.37": {
-      "sha512": "cB8ExO360UeFprY4GAuumLhg35krY56LriAAE8kNkckxFQlEIZwQ5lMsOFU0cRwUcvFajLMdALllKF2PgYJRkA==",
+    "Microsoft.Azure.WebJobs/3.0.41": {
+      "sha512": "EOigHt+kjrpbg53s8SYn4dlTpZG9IgWPNrdmcdSG8c7U8qKZvcF4BwZtF7ETy3KGir2NtIpJaIc7dUm2+k9/GA==",
       "type": "package",
-      "path": "microsoft.azure.webjobs/3.0.37",
+      "path": "microsoft.azure.webjobs/3.0.41",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "README.md",
         "lib/netstandard2.0/Microsoft.Azure.WebJobs.Host.dll",
-        "microsoft.azure.webjobs.3.0.37.nupkg.sha512",
+        "microsoft.azure.webjobs.3.0.41.nupkg.sha512",
         "microsoft.azure.webjobs.nuspec",
         "webjobs.png"
       ]
     },
-    "Microsoft.Azure.WebJobs.Core/3.0.37": {
-      "sha512": "nKlnoQyKmC5HsUIWLXu3a9VYhLKAAriZQ8v3PLldWKjV1vIQMiHKGK68FbLjRtvZsxCnIYS44gLlQjuOua//dg==",
+    "Microsoft.Azure.WebJobs.Core/3.0.41": {
+      "sha512": "nNW4I8m5GEhOxxD/NVZGjT6ZARGSy7wi8q+ihvKDin4IY4zYLpTy/GakZeGgbi7vPxcPHL5Z65n9DAV+goasqA==",
       "type": "package",
-      "path": "microsoft.azure.webjobs.core/3.0.37",
+      "path": "microsoft.azure.webjobs.core/3.0.41",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "README.md",
         "lib/netstandard2.0/Microsoft.Azure.WebJobs.dll",
         "lib/netstandard2.0/Microsoft.Azure.WebJobs.xml",
-        "microsoft.azure.webjobs.core.3.0.37.nupkg.sha512",
+        "microsoft.azure.webjobs.core.3.0.41.nupkg.sha512",
         "microsoft.azure.webjobs.core.nuspec",
         "webjobs.png"
       ]
@@ -4805,17 +4857,17 @@
         "microsoft.azure.webjobs.extensions.nuspec"
       ]
     },
-    "Microsoft.Azure.WebJobs.Extensions.CosmosDB/4.8.1": {
-      "sha512": "XDiqLlFJyhhlqUWNQT4F7ZGSCUbWbsNJ3r/sPAJ+rxnaCwzPS/mspgfF4HX6ABhnOYkZBvMNueXrPPVH6MHGnQ==",
+    "Microsoft.Azure.WebJobs.Extensions.CosmosDB/4.9.0": {
+      "sha512": "F3wTIc8IPaPTPchEyTK9FgujcMrmUaGTWDrxT2mviVMLFT0mtrYj4wIl0D0jnT3EzltohmIlAnhb+IDRWqQKaw==",
       "type": "package",
-      "path": "microsoft.azure.webjobs.extensions.cosmosdb/4.8.1",
+      "path": "microsoft.azure.webjobs.extensions.cosmosdb/4.9.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.txt",
         "lib/netstandard2.0/Microsoft.Azure.WebJobs.Extensions.CosmosDB.dll",
         "lib/netstandard2.0/Microsoft.Azure.WebJobs.Extensions.CosmosDB.xml",
-        "microsoft.azure.webjobs.extensions.cosmosdb.4.8.1.nupkg.sha512",
+        "microsoft.azure.webjobs.extensions.cosmosdb.4.9.0.nupkg.sha512",
         "microsoft.azure.webjobs.extensions.cosmosdb.nuspec",
         "webjobs.png"
       ]
@@ -4896,10 +4948,10 @@
         "tools/netstandard2.0/generator/Mono.Cecil.dll"
       ]
     },
-    "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
-      "sha512": "yuvf07qFWFqtK3P/MRkEKLhn5r2UbSpVueRziSqj0yJQIKFwG1pq9mOayK3zE5qZCTs0CbrwL9M6R8VwqyGy2w==",
+    "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
+      "sha512": "UcSjPsst+DfAdJGVDsu346FX0ci0ah+lw3WRtn18NUwEqRt70HaOQ7lI72vy3+1LxtqI3T5GWwV39rQSrCzAeg==",
       "type": "package",
-      "path": "microsoft.bcl.asyncinterfaces/1.1.1",
+      "path": "microsoft.bcl.asyncinterfaces/6.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4912,13 +4964,9 @@
         "lib/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.xml",
         "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll",
         "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.xml",
-        "microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
+        "microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
         "microsoft.bcl.asyncinterfaces.nuspec",
-        "ref/net461/Microsoft.Bcl.AsyncInterfaces.dll",
-        "ref/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.dll",
-        "ref/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "useSharedDesignerContext.txt"
       ]
     },
     "Microsoft.Bcl.HashCode/1.1.0": {
@@ -5075,10 +5123,10 @@
         "microsoft.codecoverage.nuspec"
       ]
     },
-    "Microsoft.CSharp/4.5.0": {
-      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
+    "Microsoft.CSharp/4.7.0": {
+      "sha512": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
       "type": "package",
-      "path": "microsoft.csharp/4.5.0",
+      "path": "microsoft.csharp/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5091,6 +5139,7 @@
         "lib/netcoreapp2.0/_._",
         "lib/netstandard1.3/Microsoft.CSharp.dll",
         "lib/netstandard2.0/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.xml",
         "lib/portable-net45+win8+wp8+wpa81/_._",
         "lib/uap10.0.16299/_._",
         "lib/win8/_._",
@@ -5100,7 +5149,7 @@
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "microsoft.csharp.4.5.0.nupkg.sha512",
+        "microsoft.csharp.4.7.0.nupkg.sha512",
         "microsoft.csharp.nuspec",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
@@ -5158,10 +5207,10 @@
         "microsoft.dotnet.platformabstractions.nuspec"
       ]
     },
-    "Microsoft.Extensions.Azure/1.7.4": {
-      "sha512": "AVYk0jKLZa1d0r89cNs5pCgPAQMe1uco6g0FIuzyc7eEOccd+TjXGXiRkTNQibf8wYrCd15Qt+xvcKTmGR0sZg==",
+    "Microsoft.Extensions.Azure/1.7.5": {
+      "sha512": "g4yVHO4qlOKEwniz57o4sb/Pl4/ne6o5ecGLJIMp46PdMMIicIFcKPb1+IQNWLPAvg0LxNAeR2qHwdqAA7BKMg==",
       "type": "package",
-      "path": "microsoft.extensions.azure/1.7.4",
+      "path": "microsoft.extensions.azure/1.7.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5170,7 +5219,7 @@
         "azureicon.png",
         "lib/netstandard2.0/Microsoft.Extensions.Azure.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Azure.xml",
-        "microsoft.extensions.azure.1.7.4.nupkg.sha512",
+        "microsoft.extensions.azure.1.7.5.nupkg.sha512",
         "microsoft.extensions.azure.nuspec"
       ]
     },
@@ -9599,28 +9648,31 @@
         "system.text.encoding.extensions.nuspec"
       ]
     },
-    "System.Text.Encodings.Web/4.7.2": {
-      "sha512": "iTUgB/WtrZ1sWZs84F2hwyQhiRH6QNjQv2DkwrH+WP6RoFga2Q1m3f9/Q7FG8cck8AdHitQkmkXSY8qylcDmuA==",
+    "System.Text.Encodings.Web/6.0.0": {
+      "sha512": "Vg8eB5Tawm1IFqj4TVK1czJX89rhFxJo9ELqc/Eiq0eXy13RK00eubyU6TJE6y+GQXjyV5gSfiewDUZjQgSE0w==",
       "type": "package",
-      "path": "system.text.encodings.web/4.7.2",
+      "path": "system.text.encodings.web/6.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Text.Encodings.Web.targets",
+        "buildTransitive/netcoreapp3.1/_._",
         "lib/net461/System.Text.Encodings.Web.dll",
         "lib/net461/System.Text.Encodings.Web.xml",
-        "lib/netstandard1.0/System.Text.Encodings.Web.dll",
-        "lib/netstandard1.0/System.Text.Encodings.Web.xml",
+        "lib/net6.0/System.Text.Encodings.Web.dll",
+        "lib/net6.0/System.Text.Encodings.Web.xml",
+        "lib/netcoreapp3.1/System.Text.Encodings.Web.dll",
+        "lib/netcoreapp3.1/System.Text.Encodings.Web.xml",
         "lib/netstandard2.0/System.Text.Encodings.Web.dll",
         "lib/netstandard2.0/System.Text.Encodings.Web.xml",
-        "lib/netstandard2.1/System.Text.Encodings.Web.dll",
-        "lib/netstandard2.1/System.Text.Encodings.Web.xml",
-        "system.text.encodings.web.4.7.2.nupkg.sha512",
+        "runtimes/browser/lib/net6.0/System.Text.Encodings.Web.dll",
+        "runtimes/browser/lib/net6.0/System.Text.Encodings.Web.xml",
+        "system.text.encodings.web.6.0.0.nupkg.sha512",
         "system.text.encodings.web.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "useSharedDesignerContext.txt"
       ]
     },
     "System.Text.Json/4.7.2": {
@@ -10633,7 +10685,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net6.0": {
@@ -10678,15 +10731,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
+            "version": "[6.0.36, 6.0.36]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
+            "version": "[6.0.36, 6.0.36]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
+            "version": "[6.0.36, 6.0.36]"
           }
         ],
         "frameworkReferences": {
@@ -10694,7 +10747,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
