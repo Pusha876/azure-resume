@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.WebJobs.Extensions.CosmosDB;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -25,10 +26,22 @@ namespace Company.Function
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
+            // Handle case where counter document doesn't exist
+            if (counter == null)
+            {
+                log.LogWarning("Counter document not found, creating new one");
+                counter = new ResumeCounter
+                {
+                    Id = "1",
+                    Count = 0
+                };
+            }
+
             counter.Count += 1;
             await updatedCounterCollector.AddAsync(counter);
 
             var jsonToReturn = JsonConvert.SerializeObject(counter);
+            log.LogInformation($"Returning counter value: {counter.Count}");
             return new OkObjectResult(jsonToReturn);
         }
     }
