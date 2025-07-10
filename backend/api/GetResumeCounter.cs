@@ -21,8 +21,8 @@ namespace Company.Function
         [FunctionName("GetResumeCounter")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            [CosmosDB(databaseName:"AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] ResumeCounter counter,
-            [CosmosDB(databaseName:"AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] IAsyncCollector<ResumeCounter> updatedCounterCollector,
+            [CosmosDB(databaseName:"AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] Counter counter,
+            [CosmosDB(databaseName:"AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] IAsyncCollector<Counter> updatedCounterCollector,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
@@ -31,7 +31,7 @@ namespace Company.Function
             if (counter == null)
             {
                 log.LogWarning("Counter document not found, creating new one");
-                counter = new ResumeCounter
+                counter = new Counter
                 {
                     Id = "1",
                     Count = 0
@@ -45,14 +45,5 @@ namespace Company.Function
             log.LogInformation($"Returning counter value: {counter.Count}");
             return new OkObjectResult(jsonToReturn);
         }
-    }
-
-    public class ResumeCounter
-    {
-        [JsonProperty("id")]
-        public string Id { get; set; }
-
-        [JsonProperty("count")]
-        public int Count { get; set; }
     }
 }
