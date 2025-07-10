@@ -17,6 +17,7 @@ namespace Company.Function
 {
     public static class GetResumeCounter
     {
+        // Updated to test GitHub Actions workflow - Testing OIDC auth fix
         [FunctionName("GetResumeCounter")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
