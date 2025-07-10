@@ -216,3 +216,7 @@ c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.genruntimeconfig.
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\ref\tests.dll
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.sourcelink.json
 c:\WORKSPACE\azure-resume\backend\tests\obj\Debug\net6.0\tests.csproj.Up2Date
+C:\WORKSPACE\azure-resume\backend\tests\bin\Debug\net6.0\Microsoft.Azure.Core.NewtonsoftJson.dll
+C:\WORKSPACE\azure-resume\backend\tests\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\WORKSPACE\azure-resume\backend\tests\bin\Debug\net6.0\System.ClientModel.dll
+C:\WORKSPACE\azure-resume\backend\tests\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll

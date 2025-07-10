@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Primitives;
+using Microsoft.Azure.WebJobs;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace tests
 {
@@ -31,6 +34,22 @@ namespace tests
             }
 
             return logger;
+        }
+    }
+
+    public class TestAsyncCollector<T> : IAsyncCollector<T>
+    {
+        public List<T> Items { get; } = new List<T>();
+
+        public Task AddAsync(T item, CancellationToken cancellationToken = default)
+        {
+            Items.Add(item);
+            return Task.CompletedTask;
+        }
+
+        public Task FlushAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
         }
     }
 }

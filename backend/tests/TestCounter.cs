@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace tests
 {
@@ -16,15 +17,18 @@ namespace tests
         private readonly ILogger logger = TestFactory.CreateLogger();
 
         [Fact]
-        public void Http_trigger_should_return_known_string()
+        public async Task Http_trigger_should_return_known_string()
         {
             var counter = new Company.Function.Counter();
             counter.Id = "1";
             counter.Count = 2;
             var request = TestFactory.CreateHttpRequest();
-            var response = (HttpResponseMessage)Company.Function.GetResumeCounter.Run(request, counter, out counter, logger);
+            var mockCollector = new TestAsyncCollector<Company.Function.Counter>();
+            
+            var response = await Company.Function.GetResumeCounter.Run(request, counter, mockCollector, logger);
+            
             Assert.Equal(3, counter.Count);
+            Assert.IsType<OkObjectResult>(response);
         }
-
     }
 }
