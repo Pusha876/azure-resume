@@ -24,16 +24,13 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
 
     - name: Upload to blob storage
-      uses: azure/CLI@v1
-      with:
-        azcliversion: 2.58.0
-        inlineScript: |
-            az storage blob upload-batch \
-              --account-name cs210032000dc9ea5d9 \
-              -d '$web' \
-              -s frontend/ \
-              --overwrite \
-              --auth-mode login
+      run: |
+        az storage blob upload-batch \
+          --account-name cs210032000dc9ea5d9 \
+          -d '$web' \
+          -s frontend/ \
+          --overwrite \
+          --auth-mode login
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
