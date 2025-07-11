@@ -32,11 +32,8 @@ jobs:
           --overwrite \
           --auth-mode login
     - name: Purge CDN endpoint
-      uses: azure/CLI@v1
-      with:
-        azcliversion: 2.52.0
-        inlineScript: |
-           az cdn endpoint purge --content-paths  "/*" --profile-name "azureresume" --name "azureresumejpryce" --resource-group "cloud-shell-storage-eastus"
+      run: |
+        az cdn endpoint purge --content-paths  "/*" --profile-name "azureresume" --name "azureresumejpryce" --resource-group "cloud-shell-storage-eastus"
 
   # Azure logout
     - name: logout
