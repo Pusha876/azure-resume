@@ -15,6 +15,8 @@ using System.Configuration;
 using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Company.Function
 {
@@ -28,14 +30,18 @@ namespace Company.Function
         }
 
         [Function("GetResumeCounter")]
-        public async Task<GetResumeCounterOutputs> Run(
+        public async Task<HttpResponseData> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
             [CosmosDBInput(
                 databaseName: "AzureResume",
                 containerName: "Counter",
                 Connection = "AzureResumeConnectionString",
                 Id = "1",
-                PartitionKey = "1")] Counter? counter)
+                PartitionKey = "1")] Counter? counter,
+            [CosmosDBOutput(
+                databaseName: "AzureResume",
+                containerName: "Counter",
+                Connection = "AzureResumeConnectionString")] out Counter updatedCounter)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
@@ -47,13 +53,14 @@ namespace Company.Function
                     Id = "1",
                     Count = 0
                 };
-                _logger.LogInformation("Counter document not found, creating new one.");
             }
 
             // Increment the counter
             counter.Count += 1;
-            _logger.LogInformation($"Counter incremented to: {counter.Count}");
-
+            
+            // Set output counter
+            updatedCounter = counter;
+            
             // Create HTTP response
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "application/json; charset=utf-8");
@@ -64,24 +71,9 @@ namespace Company.Function
             response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
 
             var jsonToReturn = JsonConvert.SerializeObject(counter);
-            await response.WriteStringAsync(jsonToReturn);
+            response.WriteString(jsonToReturn);
 
-            return new GetResumeCounterOutputs
-            {
-                HttpResponse = response,
-                Counter = counter
-            };
+            return response;
         }
-    }
-
-    public class GetResumeCounterOutputs
-    {
-        [CosmosDBOutput(
-            databaseName: "AzureResume",
-            containerName: "Counter",
-            Connection = "AzureResumeConnectionString")]
-        public Counter? Counter { get; set; }
-
-        public HttpResponseData? HttpResponse { get; set; }
     }
 }
