@@ -1,14 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Xunit;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System.Net;
-using System.Net.Http;
+using Company.Function;
+using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Azure.Functions.Worker;
+using Moq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace tests
 {
@@ -19,16 +15,27 @@ namespace tests
         [Fact]
         public async Task Http_trigger_should_return_known_string()
         {
-            var counter = new Company.Function.Counter();
-            counter.Id = "1";
-            counter.Count = 2;
-            var request = TestFactory.CreateHttpRequest();
-            var mockCollector = new TestAsyncCollector<Company.Function.Counter>();
+            // Arrange
+            var mockRequest = new Mock<HttpRequestData>();
+            var mockResponse = new Mock<HttpResponseData>(HttpStatusCode.OK);
+            var stream = new MemoryStream();
             
-            var response = await Company.Function.GetResumeCounter.Run(request, counter, mockCollector, logger);
-            
-            Assert.Equal(3, counter.Count);
-            Assert.IsType<OkObjectResult>(response);
+            mockResponse.SetupGet(r => r.Body).Returns(stream);
+            mockResponse.SetupProperty(r => r.StatusCode);
+            mockResponse.Setup(r => r.CreateResponse()).Returns(mockResponse.Object);
+            mockRequest.Setup(r => r.CreateResponse(It.IsAny<HttpStatusCode>())).Returns(mockResponse.Object);
+
+            var counter = new Counter() { Id = "1", Count = 2 };
+            var loggerFactory = new Mock<ILoggerFactory>();
+            loggerFactory.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(logger);
+
+            var function = new GetResumeCounter(loggerFactory.Object);
+
+            // Act
+            var result = await function.Run(mockRequest.Object, counter);
+
+            // Assert
+            Assert.Equal(3, result.Counter?.Count);
         }
     }
 }

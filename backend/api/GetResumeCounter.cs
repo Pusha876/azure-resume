@@ -12,38 +12,76 @@ using System.Net.Http;
 using System.Net;
 using System.Text;
 using System.Configuration;
+using System.Net;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 
 namespace Company.Function
 {
-    public static class GetResumeCounter
+    public class GetResumeCounter
     {
-        // Updated to test GitHub Actions workflow - Testing SERVICE_PRINCIPAL auth
-        [FunctionName("GetResumeCounter")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            [CosmosDB(databaseName:"AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] Counter counter,
-            [CosmosDB(databaseName:"AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] IAsyncCollector<Counter> updatedCounterCollector,
-            ILogger log)
+        private readonly ILogger _logger;
+
+        public GetResumeCounter(ILoggerFactory loggerFactory)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            _logger = loggerFactory.CreateLogger<GetResumeCounter>();
+        }
+
+        [Function("GetResumeCounter")]
+        public async Task<GetResumeCounterOutputs> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
+            [CosmosDBInput(
+                databaseName: "AzureResume",
+                containerName: "Counter",
+                Connection = "AzureResumeConnectionString",
+                Id = "1",
+                PartitionKey = "1")] Counter? counter)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
 
             // Handle case where counter document doesn't exist
             if (counter == null)
             {
-                log.LogWarning("Counter document not found, creating new one");
                 counter = new Counter
                 {
                     Id = "1",
                     Count = 0
                 };
+                _logger.LogInformation("Counter document not found, creating new one.");
             }
 
+            // Increment the counter
             counter.Count += 1;
-            await updatedCounterCollector.AddAsync(counter);
+            _logger.LogInformation($"Counter incremented to: {counter.Count}");
+
+            // Create HTTP response
+            var response = req.CreateResponse(HttpStatusCode.OK);
+            response.Headers.Add("Content-Type", "application/json; charset=utf-8");
+            
+            // Add CORS headers
+            response.Headers.Add("Access-Control-Allow-Origin", "*");
+            response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
 
             var jsonToReturn = JsonConvert.SerializeObject(counter);
-            log.LogInformation($"Returning counter value: {counter.Count}");
-            return new OkObjectResult(jsonToReturn);
+            await response.WriteStringAsync(jsonToReturn);
+
+            return new GetResumeCounterOutputs
+            {
+                HttpResponse = response,
+                Counter = counter
+            };
         }
+    }
+
+    public class GetResumeCounterOutputs
+    {
+        [CosmosDBOutput(
+            databaseName: "AzureResume",
+            containerName: "Counter",
+            Connection = "AzureResumeConnectionString")]
+        public Counter? Counter { get; set; }
+
+        public HttpResponseData? HttpResponse { get; set; }
     }
 }

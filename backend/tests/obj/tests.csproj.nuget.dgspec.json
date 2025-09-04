@@ -67,6 +67,10 @@
             "Microsoft.Azure.Functions.Worker.Sdk": {
               "target": "Package",
               "version": "[1.16.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           },
           "imports": [
@@ -155,13 +159,25 @@
               "target": "Package",
               "version": "[1.21.0, )"
             },
+            "Microsoft.Azure.Functions.Worker.Extensions.CosmosDB": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
             "Microsoft.Azure.Functions.Worker.Extensions.Http": {
               "target": "Package",
               "version": "[3.2.0, )"
             },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.8.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.69, )"
             },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

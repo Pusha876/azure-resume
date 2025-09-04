@@ -5,6 +5,8 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Azure.Functions.Worker.Extensions.CosmosDB;
 using Newtonsoft.Json;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Company.Function
 {
@@ -62,5 +64,22 @@ namespace Company.Function
         public Counter CosmosOutput { get; set; }
 
         public HttpResponseData HttpResponse { get; set; }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            var host = new HostBuilder()
+                .ConfigureFunctionsWebApplication()
+                .ConfigureServices(services =>
+                {
+                    services.AddApplicationInsightsTelemetryWorkerService();
+                    services.ConfigureFunctionsApplicationInsights();
+                })
+                .Build();
+
+            host.Run();
+        }
     }
 }
