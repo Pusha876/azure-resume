@@ -4,10 +4,10 @@ namespace Company.Function
 {
     public class Counter
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
-        [JsonProperty(PropertyName = "count")]
+        [JsonProperty("id")]
+        public string Id { get; set; } = string.Empty;
+
+        [JsonProperty("count")]
         public int Count { get; set; }
-      
     }
 }

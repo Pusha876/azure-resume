@@ -11,9 +11,9 @@ permissions:
   contents: read
 
 env:
-  AZURE_FUNCTIONAPP_NAME: GetJamieResumeCounter   # set this to your function app name on Azure
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'backend'       # set this to the path to your function app project, defaults to the repository root
-  DOTNET_VERSION: '6.0.x'                     # set this to the dotnet version to use (matches your project target framework)
+  AZURE_FUNCTIONAPP_NAME: GetJamieResumeCounter
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'backend'
+  DOTNET_VERSION: '8.0.x'  # Updated to .NET 8
 
 jobs:
   build-and-deploy:
@@ -29,7 +29,6 @@ jobs:
         client-id: ${{ secrets.AZURE_CLIENT_ID}}
         tenant-id: ${{ secrets.AZURE_TENANT_ID}}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
-
 
     - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
       uses: actions/setup-dotnet@v3
