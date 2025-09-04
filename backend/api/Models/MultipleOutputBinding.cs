@@ -6,8 +6,8 @@ namespace Company.Function.Models
     public class MultipleOutputBinding
     {
         [CosmosDBOutput(databaseName: "AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString")]
-        public Counter CosmosOutput { get; set; }
+        public Counter? CosmosOutput { get; set; }
 
-        public HttpResponseData HttpResponse { get; set; }
+        public HttpResponseData? HttpResponse { get; set; }
     }
 }
