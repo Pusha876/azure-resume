@@ -54,6 +54,9 @@ namespace Company.Function
             // Increment the counter
             counter.Count += 1;
             
+            // Save updated counter back to Cosmos DB using helper method
+            UpdateCosmosDb(counter);
+            
             // Create HTTP response
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "application/json; charset=utf-8");
@@ -66,9 +69,6 @@ namespace Company.Function
             // Write counter to response
             await response.WriteStringAsync(JsonConvert.SerializeObject(counter));
             
-            // Write updated counter back to Cosmos DB
-            await WriteToCosmosDBAsync(counter);
-            
             return response;
         }
 
@@ -77,7 +77,7 @@ namespace Company.Function
             databaseName: "AzureResume",
             containerName: "Counter",
             Connection = "AzureResumeConnectionString")]
-        private static Counter WriteToCosmosDBAsync(Counter counter)
+        private static Counter UpdateCosmosDb(Counter counter)
         {
             return counter;
         }
