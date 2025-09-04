@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Azure.Functions.Worker.Extensions.CosmosDB;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Company.Function.Models;

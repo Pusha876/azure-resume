@@ -24,12 +24,4 @@
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="resume\backend\api\Program.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="resume\backend\api\Program.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
 </Project>
