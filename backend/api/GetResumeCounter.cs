@@ -37,11 +37,7 @@ namespace Company.Function
                 containerName: "Counter",
                 Connection = "AzureResumeConnectionString",
                 Id = "1",
-                PartitionKey = "1")] Counter? counter,
-            [CosmosDBOutput(
-                databaseName: "AzureResume",
-                containerName: "Counter",
-                Connection = "AzureResumeConnectionString")] out Counter updatedCounter)
+                PartitionKey = "1")] Counter? counter)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
@@ -58,9 +54,6 @@ namespace Company.Function
             // Increment the counter
             counter.Count += 1;
             
-            // Set output counter
-            updatedCounter = counter;
-            
             // Create HTTP response
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "application/json; charset=utf-8");
@@ -70,10 +63,23 @@ namespace Company.Function
             response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
             response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
 
-            var jsonToReturn = JsonConvert.SerializeObject(counter);
-            response.WriteString(jsonToReturn);
-
+            // Write counter to response
+            await response.WriteStringAsync(JsonConvert.SerializeObject(counter));
+            
+            // Write updated counter back to Cosmos DB
+            await WriteToCosmosDBAsync(counter);
+            
             return response;
+        }
+
+        // Helper method to write counter back to Cosmos DB
+        [CosmosDBOutput(
+            databaseName: "AzureResume",
+            containerName: "Counter",
+            Connection = "AzureResumeConnectionString")]
+        private static Counter WriteToCosmosDBAsync(Counter counter)
+        {
+            return counter;
         }
     }
 }

@@ -71,7 +71,7 @@ namespace Company.Function
         static void Main()
         {
             var host = new HostBuilder()
-                .ConfigureFunctionsWebApplication()
+                .ConfigureFunctionsWorkerDefaults()
                 .ConfigureServices(services =>
                 {
                     services.AddApplicationInsightsTelemetryWorkerService();
