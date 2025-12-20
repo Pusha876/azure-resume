@@ -21,7 +21,6 @@ namespace Company.Function
         }
 
         [Function("GetResumeCounter")]
-        [CosmosDBOutput(databaseName: "AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString")]
         public async Task<MultipleOutputBinding> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
             [CosmosDBInput(databaseName: "AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] Counter counter)
